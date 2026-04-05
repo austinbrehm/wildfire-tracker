@@ -1,1 +1,27 @@
 .venv
+.env
+.gitignore
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+*.egg
+dist/
+build/
+
+# Django
+db.sqlite3
+django/db.sqlite3
+*.log
+local_settings.py
+staticfiles/
+media/
+*.pot
+*.mo
+.env.local
+.env.*.local
+
+# Misc
+.DS_Store

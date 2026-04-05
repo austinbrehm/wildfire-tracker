@@ -21,9 +21,12 @@ def main(state: str, year: str):
                     wildfires.append((title, date))
 
     # Print results
-    print(f"{len(wildfires)} wildfires happened in {state.capitalize()} during {year}:")
-    for title, date in wildfires:
-        print(f"🔥 Wildfire Event: {title}, {date}")
+    if not wildfires:
+        print(f"NASA EONET does not have any wildfires recorded for {state.capitalize()} in {year}.")
+    else:
+        print(f"{len(wildfires)} wildfires happened in {state.capitalize()} during {year}:")
+        for title, date in wildfires:
+            print(f"🔥 Wildfire Event: {title}, {date}")
 
 
 if __name__ == "__main__":

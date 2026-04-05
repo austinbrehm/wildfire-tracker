@@ -21,6 +21,7 @@ def main(state: str, year: str):
                     wildfires.append((title, date))
 
     # Print results
+    print(f"{len(wildfires)} wildfires happened in {state.capitalize()} during {year}:")
     for title, date in wildfires:
         print(f"🔥 Wildfire Event: {title}, {date}")
 

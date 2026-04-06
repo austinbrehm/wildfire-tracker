@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="wildfires-page">
+    <h1>Search for wildfires</h1>
+
+    {% if form_errors %}
+    <ul class="form-errors" role="alert">
+        {% for error in form_errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <form class="portfolio-form" method="get" action="">
+        <div class="form-row">
+            <label>
+                <span class="label-text">State</span>
+                <input type="text" name="state" value="{{ form_data.state }}" placeholder="e.g. California">
+            </label>
+        </div>
+        <div class="form-row">
+            <label>
+                <span class="label-text">Year</span>
+                <input type="text" name="year" value="{{ form_data.year }}" placeholder="e.g. 2026">
+            </label>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    {% if wildfires %}
+    <div class="results">
+        <h2>Results</h2>
+        <pre>{{ wildfires }}</pre>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

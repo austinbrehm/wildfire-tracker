@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class WildfiresConfig(AppConfig):
-    name = "wildfires"
+    name = "apps.wildfires"

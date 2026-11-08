@@ -25,7 +25,9 @@ SECRET_KEY = "django-insecure-w0msuj=v-sgu$&$&5=xx+7f*dipy_te!!t_e184k6h0@6@e9kq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "wildfire-tracker-zeta-khaki.vercel.app"
+]
 
 
 # Application definition

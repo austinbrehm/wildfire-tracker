@@ -1,0 +1,2 @@
+[tool.vercel]
+entrypoint = "django.config.asgi:application"

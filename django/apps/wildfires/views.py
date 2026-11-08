@@ -1,12 +1,17 @@
-import subprocess
+import io
 import sys
+from contextlib import redirect_stdout
 from pathlib import Path
 
 from django.shortcuts import render
 
 
-def _project_root() -> Path:
-    return Path(__file__).resolve().parents[3]
+def _import_root_main_module():
+    root = Path(__file__).resolve().parents[3]
+    if str(root) not in sys.path:
+        sys.path.insert(0, str(root))
+    import main as root_main
+    return root_main
 
 
 def wildfires_list(request):
@@ -24,24 +29,13 @@ def wildfires_list(request):
             form_errors.append('Both state and year are required.')
         else:
             try:
-                project_root = _project_root()
-                script_path = project_root / 'main.py'
-                result = subprocess.run(
-                    [sys.executable, str(script_path), state, year],
-                    cwd=str(project_root),
-                    capture_output=True,
-                    text=True,
-                    check=False,
-                )
-
-                if result.returncode == 0:
-                    wildfires = result.stdout
-                else:
-                    form_errors.append(
-                        f'Error retrieving wildfire data: {result.stderr.strip() or result.stdout.strip() or "unknown error"}'
-                    )
+                root_main = _import_root_main_module()
+                stdout = io.StringIO()
+                with redirect_stdout(stdout):
+                    root_main.main(state, year)
+                wildfires = stdout.getvalue().strip()
             except Exception as e:
-                form_errors.append(f'Error: {str(e)}')
+                form_errors.append(f'Error retrieving wildfire data: {str(e)}')
 
     return render(request, 'wildfires/wildfires.html', {
         'form_data': form_data,

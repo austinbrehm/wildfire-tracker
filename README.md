@@ -27,3 +27,7 @@ Example:
 - `django/` — Django web app and project configuration
 - `django/templates/` — HTML templates
 - `django/static/` — CSS, JS, and image assets
+
+## How to test
+From the project root, run: 
+`pytest`
